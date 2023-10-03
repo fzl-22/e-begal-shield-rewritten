@@ -71,4 +71,26 @@ class ValidatorUtil {
     }
     return null;
   }
+
+  static String? deviceNameValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Device name must not be empty';
+    }
+    if (value.length > 64) {
+      return 'Device name maximum length must not exceed 64 characters';
+    }
+
+    return null;
+  }
+
+  static String? deviceIdValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Device ID must not be empty';
+    }
+    if (value.length > 9) {
+      return 'Device ID maximum length must not exceed 9 characters';
+    }
+
+    return null;
+  }
 }
