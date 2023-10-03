@@ -6,8 +6,6 @@ class HighlightedTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final bool obscureText;
-  
-
 
   const HighlightedTextFormField({
     super.key,
@@ -36,6 +34,12 @@ class HighlightedTextFormField extends StatelessWidget {
           ),
         ),
         errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.error,
