@@ -1,7 +1,8 @@
 import 'package:e_begal_shield_rewritten/global/utils/validator.util.dart';
+import 'package:e_begal_shield_rewritten/global/widgets/buttons/google_button.dart';
+import 'package:e_begal_shield_rewritten/global/widgets/buttons/submit_button.dart';
 import 'package:e_begal_shield_rewritten/global/widgets/fields/highlighted_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -15,6 +16,14 @@ class _RegisterFormState extends State<RegisterForm> {
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  Future<void> _registerUser() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    _formKey.currentState!.save();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,34 +71,14 @@ class _RegisterFormState extends State<RegisterForm> {
             ],
           ),
           const SizedBox(height: 48),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                textStyle: Theme.of(context).textTheme.labelMedium,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                shadowColor: Colors.transparent,
-                padding: const EdgeInsets.symmetric(vertical: 16)),
+          SubmitButton(
+            onPressed: _registerUser,
             child: const Text("Register"),
           ),
           const SizedBox(height: 16),
-          ElevatedButton.icon(
+          GoogleButton(
             onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 232, 232, 232),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              textStyle: Theme.of(context).textTheme.labelSmall,
-              foregroundColor: Theme.of(context).colorScheme.tertiary,
-              shadowColor: Colors.transparent,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
             label: const Text("Register with Google"),
-            icon: Logo(Logos.google, size: 24),
           ),
         ],
       ),
