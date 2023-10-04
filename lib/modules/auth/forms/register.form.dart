@@ -2,6 +2,7 @@ import 'package:e_begal_shield_rewritten/global/utils/validator.util.dart';
 import 'package:e_begal_shield_rewritten/global/widgets/buttons/google_button.dart';
 import 'package:e_begal_shield_rewritten/global/widgets/buttons/submit_button.dart';
 import 'package:e_begal_shield_rewritten/global/widgets/fields/highlighted_text_form_field.dart';
+import 'package:e_begal_shield_rewritten/modules/auth/register_detail.page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -14,7 +15,7 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future<void> _registerUser() async {
@@ -23,6 +24,16 @@ class _RegisterFormState extends State<RegisterForm> {
     }
 
     _formKey.currentState!.save();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => RegisterDetailPage(
+          fullName: _fullNameController.text,
+          emailAddress: _emailAddressController.text,
+          password: _passwordController.text,
+        ),
+      ),
+    );
   }
 
   @override
@@ -40,7 +51,7 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           const SizedBox(height: 16),
           HighlightedTextFormField(
-            controller: _emailController,
+            controller: _emailAddressController,
             labelText: "Email",
             validator: ValidatorUtil.registerEmailValidator,
             keyboardType: TextInputType.emailAddress,
