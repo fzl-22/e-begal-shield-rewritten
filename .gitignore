@@ -45,3 +45,4 @@ app.*.map.json
 
 # Other
 android/app/src/main/AndroidManifest.xml
+lib/firebase_options.dart
