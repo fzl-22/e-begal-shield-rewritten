@@ -5,6 +5,7 @@ import 'package:e_begal_shield_rewritten/global/widgets/buttons/submit_button.da
 import 'package:e_begal_shield_rewritten/global/widgets/fields/highlighted_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,12 +27,13 @@ class RegisterDetailPage extends StatefulWidget {
 
 class _RegisterDetailPageState extends State<RegisterDetailPage> {
   final _formKey = GlobalKey<FormState>();
-  File? _profilePicture;
+  File? _selectedProfilePicture;
   final _fullNameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
-  final _dateOfBirthController = TextEditingController();
+  DateTime? _selectedDateOfBirth;
   final _deviceNameController = TextEditingController();
   final _deviceIdController = TextEditingController();
+  final _userAddressController = TextEditingController();
 
   Future<void> _selectDateOfBirth() async {
     final selectedDate = await showDatePicker(
@@ -50,14 +52,13 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     }
 
     setState(() {
-      _dateOfBirthController.text =
-          selectedDate.toLocal().toString().split(" ")[0];
+      _selectedDateOfBirth = selectedDate;
     });
   }
 
   Future<void> _selectProfilePicture() async {
     final selectedImage = await ImagePicker().pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       imageQuality: 100,
       maxHeight: 480,
       maxWidth: 480,
@@ -67,7 +68,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
       return;
     }
     setState(() {
-      _profilePicture = File(selectedImage.path);
+      _selectedProfilePicture = File(selectedImage.path);
     });
   }
 
@@ -101,7 +102,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(64),
                   onTap: _selectProfilePicture,
-                  child: _profilePicture == null
+                  child: _selectedProfilePicture == null
                       ? ProfilePicture(
                           name: _fullNameController.text.contains(" ")
                               ? _fullNameController.text.trim()
@@ -112,7 +113,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         )
                       : CircleAvatar(
                           radius: 64,
-                          backgroundImage: FileImage(_profilePicture!)),
+                          backgroundImage: FileImage(_selectedProfilePicture!),
+                        ),
                 ),
               ),
             ),
@@ -164,8 +166,11 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           alignment: Alignment.centerLeft),
                       onPressed: _selectDateOfBirth,
                       icon: const Icon(IconlyLight.calendar),
-                      label: Text(_dateOfBirthController.text.isNotEmpty
-                          ? _dateOfBirthController.text
+                      label: Text(_selectedDateOfBirth != null
+                          ? _selectedDateOfBirth!
+                              .toLocal()
+                              .toString()
+                              .split(" ")[0]
                           : "Select Date of Birth"),
                     ),
                     const SizedBox(height: 16),
@@ -182,9 +187,19 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       validator: ValidatorUtil.deviceIdValidator,
                       keyboardType: TextInputType.name,
                     ),
+                    const SizedBox(height: 16),
+                    HighlightedTextFormField(
+                      controller: _userAddressController,
+                      labelText: "User Address",
+                      validator: ValidatorUtil.deviceIdValidator,
+                      keyboardType: TextInputType.name,
+                      maxLines: 3,
+                    ),
                     const SizedBox(height: 36),
                     SubmitButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go('/login');
+                      },
                       child: const Text("Create User"),
                     ),
                   ],

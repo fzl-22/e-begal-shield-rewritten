@@ -3,6 +3,7 @@ import 'package:e_begal_shield_rewritten/global/widgets/buttons/google_button.da
 import 'package:e_begal_shield_rewritten/global/widgets/buttons/submit_button.dart';
 import 'package:e_begal_shield_rewritten/global/widgets/fields/highlighted_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -21,6 +22,8 @@ class _LoginFormState extends State<LoginForm> {
       return;
     }
     _formKey.currentState!.save();
+
+    context.go('/home');
   }
 
   @override
