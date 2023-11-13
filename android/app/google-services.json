@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "581030367598",
+    "firebase_url": "https://e-begalshield-16fa6-default-rtdb.firebaseio.com",
+    "project_id": "e-begalshield-16fa6",
+    "storage_bucket": "e-begalshield-16fa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581030367598:android:126f4c30902db6c7b9317f",
+        "android_client_info": {
+          "package_name": "com.example.e_begal_shield_rewritten"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6m_VnOvCfNWkCHKMo8rMtdBM0jQw9-WQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
