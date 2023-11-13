@@ -1,5 +1,6 @@
 import 'package:e_begal_shield_rewritten/modules/auth/login.page.dart';
 import 'package:e_begal_shield_rewritten/modules/auth/register.page.dart';
+import 'package:e_begal_shield_rewritten/modules/home/home.page.dart';
 import 'package:go_router/go_router.dart';
 
 final routerConfig = GoRouter(
@@ -14,6 +15,11 @@ final routerConfig = GoRouter(
       name: 'register',
       path: "/register",
       builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      name: 'home',
+      path: "/home",
+      builder: (context, state) => const HomePage(),
     ),
   ],
 );

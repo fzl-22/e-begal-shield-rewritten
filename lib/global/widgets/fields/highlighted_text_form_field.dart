@@ -8,6 +8,7 @@ class HighlightedTextFormField extends StatelessWidget {
   final bool obscureText;
   final bool enabled;
   final void Function(String)? onChanged;
+  final int maxLines;
 
   const HighlightedTextFormField({
     super.key,
@@ -18,6 +19,7 @@ class HighlightedTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.enabled = true,
     this.onChanged,
+    this.maxLines = 1,
   });
 
   @override
@@ -69,6 +71,7 @@ class HighlightedTextFormField extends StatelessWidget {
       validator: validator,
       enabled: enabled,
       onChanged: onChanged,
+      maxLines: maxLines,
     );
   }
 }
